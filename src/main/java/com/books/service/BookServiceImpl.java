@@ -8,7 +8,7 @@ import com.books.dal.repository.BookRepository;
 import com.books.dal.repository.CategoryRepository;
 import com.books.dto.BookDto;
 import com.books.service.mapper.BookMapper;
-import lombok.RequiredArgsConstructor;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +30,13 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    @Transactional
     public BookDto create(BookDto dto) {
-        Author author = authorRepo.findById(dto.getAuthorId()).orElseThrow();
-        Category category = categoryRepo.findById(dto.getCategoryId()).orElseThrow();
+        Author author = authorRepo.findById(dto.getAuthorId())
+                .orElseThrow(() -> new RuntimeException("Author not found"));
+
+        Category category = categoryRepo.findById(dto.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
 
         Book book = bookMapper.toEntity(dto);
         book.setAuthor(author);

@@ -20,6 +20,10 @@ public class Author {
 
     private String name;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
+
     public List<Book> getBooks() {
         return books;
     }
@@ -27,10 +31,6 @@ public class Author {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "author")
-    private List<Book> books;
 
 
     public Author() {
