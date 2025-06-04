@@ -1,0 +1,45 @@
+نمونه کامل در Postman
+
+    می‌توانید یک Collection جدید بسازید به نام “Books API”.
+
+    داخل آن یک Request به نام “Create Book” با توضیحات زیر:
+
+        Method: POST
+
+        URL: http://localhost:9090/api/books
+
+        Headers: Content-Type: application/json
+        //{
+        
+            "title": "رباعیات خیام",
+            "authorId": 1,
+            "categoryId": 1,
+            "isbn": "978-600-112-345-6"
+          }
+//
+
+        Body (raw JSON، مثال داده‌شده).
+
+    یک Request دیگر با نام “List All Books”:
+
+        Method: GET
+
+        URL: http://localhost:9090/api/books
+
+        Headers: (نیازی نیست)
+
+        Body: —
+
+    هر بار که Server را Restart می‌کنید، مطمئن شوید رکوردهای Author/Category را در H2 Console مجدداً درج کرده‌اید (چون دیتابیس در حافظه است و با Stop/Start پاک می‌شود).
+
+وارد لینک دیتابیس اچ 2 می شی
+    http://localhost:9090/h2-console
+
+تنظیمات یوآرال انجام میدی
+     JDBC URL: jdbc:h2:mem:librarydb
+
+     ----------------------------------
+
+-- اگر ستون id اتو اینکریمنت است و نیازی به مقدار id ندارید:
+INSERT INTO AUTHOR (name) VALUES ('حافظ');
+INSERT INTO CATEGORY (name) VALUES ('شعر');
