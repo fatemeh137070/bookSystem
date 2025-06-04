@@ -34,6 +34,7 @@ public class BookController {
         return bookFacade.getBooksByAuthorId(authorId);
     }
 
+
     @GetMapping("/category/{categoryId}")
     public List<BookDto> getBooksByCategory(@PathVariable Long categoryId) {
         return bookFacade.getBooksByCategoryId(categoryId);
