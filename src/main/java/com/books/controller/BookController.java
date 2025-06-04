@@ -4,6 +4,7 @@ import com.books.dal.entity.Book;
 import com.books.dto.BookDto;
 import com.books.facade.BookFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,4 +40,17 @@ public class BookController {
     public List<BookDto> getBooksByCategory(@PathVariable Long categoryId) {
         return bookFacade.getBooksByCategoryId(categoryId);
     }
+
+    @GetMapping("/multi-thread-test")
+    public String runMultiThreadTest() {
+        bookFacade.createBooksInParallel(1L, 1L);
+        return "Test started!";
+    }
+
+    @PostMapping("/parallel")
+    public ResponseEntity<String> createBooksInParallel() {
+        bookFacade.createBooksInParallelCreate(); // متد مالتی‌ترد
+        return ResponseEntity.ok("Books are being created in parallel.");
+    }
+
 }

@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,5 +68,59 @@ public class BookServiceImpl implements BookService{
         return bookRepo.findByCategory(category).stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public void createBooksInParallel(Long authorId, Long categoryId) {
+        ExecutorService executor = Executors.newFixedThreadPool(5); // 5 ترد همزمان
+
+        for (int i = 0; i < 10; i++) {
+            int index = i;
+            executor.submit(() -> {
+                BookDto dto = new BookDto();
+                dto.setTitle("Parallel Book " + index);
+                dto.setAuthorId(authorId);
+                dto.setCategoryId(categoryId);
+
+                try {
+                    create(dto);
+                    System.out.println("✅ Book " + index + " created in " + Thread.currentThread().getName());
+                } catch (Exception e) {
+                    System.err.println("❌ Failed to create Book " + index + ": " + e.getMessage());
+                }
+            });
+        }
+
+        executor.shutdown();
+    }
+    @Override
+    public void createBooksInParallelCreate() {
+        Author author = authorRepo.findAll().stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("No author found"));
+        Category category = categoryRepo.findAll().stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("No category found"));
+
+        Long authorId = author.getId();
+        Long categoryId = category.getId();
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        for (int i = 0; i < 10; i++) {
+            int index = i;
+            executor.submit(() -> {
+                BookDto dto = new BookDto();
+                dto.setTitle("Dynamic Parallel Book " + index);
+                dto.setAuthorId(authorId);
+                dto.setCategoryId(categoryId);
+
+                try {
+                    create(dto);
+                    System.out.println("✅ Book " + index + " created in " + Thread.currentThread().getName());
+                } catch (Exception e) {
+                    System.err.println("❌ Failed to create Book " + index + ": " + e.getMessage());
+                }
+            });
+        }
+
+        executor.shutdown();
     }
 }

@@ -11,4 +11,8 @@ public interface BookService {
 
     List<BookDto> getBooksByAuthorId(Long authorId);
     List<BookDto> getBooksByCategoryId(Long categoryId);
+
+    public void createBooksInParallel(Long authorId, Long categoryId) ;
+
+    void createBooksInParallelCreate();
 }

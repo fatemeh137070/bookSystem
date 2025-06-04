@@ -35,4 +35,13 @@ public class BookFacade {
     public List<BookDto> getBooksByCategoryId(Long categoryId) {
         return bookService.getBooksByCategoryId(categoryId);
     }
+
+
+    public void createBooksInParallel(Long authorId, Long categoryId){
+        bookService.createBooksInParallel(authorId, categoryId);
+    }
+
+    public void createBooksInParallelCreate() {
+        bookService.createBooksInParallelCreate();
+    }
 }

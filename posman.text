@@ -85,3 +85,15 @@ INSERT INTO CATEGORY (name) VALUES ('شعر');
     GET http://localhost:9090/api/books/category/1
 
 
+
+    --------------------------------------multiTherad--------------------------
+    POST :http://localhost:9090/api/books/parallel
+
+    {
+      "authorId": 1,
+      "categoryId": 1
+    }
+
+Content-Type:  application/json
+
+
