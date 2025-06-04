@@ -27,4 +27,12 @@ public class BookFacade {
     public List<BookDto> getAll() {
         return bookService.getAll();
     }
+
+    public List<BookDto> getBooksByAuthorId(Long authorId) {
+        return bookService.getBooksByAuthorId(authorId);
+    }
+
+    public List<BookDto> getBooksByCategoryId(Long categoryId) {
+        return bookService.getBooksByCategoryId(categoryId);
+    }
 }

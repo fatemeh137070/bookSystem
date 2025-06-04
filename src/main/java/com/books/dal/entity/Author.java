@@ -1,26 +1,37 @@
 package com.books.dal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 
-//@Data
+
+@Data
 @Entity(name = "author")
 public class Author {
 
-
-    public Author(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
+
 
     public Author() {
 

@@ -14,18 +14,19 @@ public class Book {
 
     private String title;
 
+    @ManyToOne
+    private Author author;
+
+    @ManyToOne
+    private Category category;
+
+
     public Book(Long id, String title, Author author, Category category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
     }
-
-    @ManyToOne
-    private Author author;
-
-    @ManyToOne
-    private Category category;
 
     public Book() {
 

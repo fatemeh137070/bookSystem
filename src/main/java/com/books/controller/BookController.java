@@ -29,4 +29,13 @@ public class BookController {
     public List<BookDto> getAllBooks() {
         return bookFacade.getAll();
     }
+    @GetMapping("/author/{authorId}")
+    public List<BookDto> getBooksByAuthor(@PathVariable Long authorId) {
+        return bookFacade.getBooksByAuthorId(authorId);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public List<BookDto> getBooksByCategory(@PathVariable Long categoryId) {
+        return bookFacade.getBooksByCategoryId(categoryId);
+    }
 }

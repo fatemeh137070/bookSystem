@@ -43,3 +43,45 @@
 -- اگر ستون id اتو اینکریمنت است و نیازی به مقدار id ندارید:
 INSERT INTO AUTHOR (name) VALUES ('حافظ');
 INSERT INTO CATEGORY (name) VALUES ('شعر');
+
+-----------------------------------------------------------------------------------
+
+۱. تست ساخت کتاب (POST)
+
+    URL: POST http://localhost:9090/api/books
+
+    Headers:
+
+        Content-Type: application/json
+
+        {
+          "title": "کتاب نمونه",
+          "authorId": 1,
+          "categoryId": 2
+        }
+
+
+ -------   --------------------- --------------   ----------------------------------
+
+
+۲. گرفتن همه کتاب‌ها (GET)
+
+    URL: GET http://localhost:8080/books
+
+    Headers: لازم نیست چیزی اضافه کنی.
+
+۳. گرفتن کتاب‌های یک نویسنده خاص (GET)
+
+    URL:
+    GET http://localhost:9090/books/author/{authorId}
+    مثلا:
+    GET http://localhost:9090/api/books/author/1
+
+۴. گرفتن کتاب‌های یک دسته‌بندی خاص (GET)
+
+    URL:
+    GET http://localhost:8080/books/category/{categoryId}
+    مثلا:
+    GET http://localhost:9090/api/books/category/1
+
+

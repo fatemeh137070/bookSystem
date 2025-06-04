@@ -47,4 +47,20 @@ public class BookServiceImpl implements BookService{
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BookDto> getBooksByAuthorId(Long authorId) {
+        Author author = authorRepo.findById(authorId).orElseThrow(() -> new RuntimeException("Author not found"));
+        return bookRepo.findByAuthor(author).stream()
+                .map(bookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookDto> getBooksByCategoryId(Long categoryId) {
+        Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new RuntimeException("Category not found"));
+        return bookRepo.findByCategory(category).stream()
+                .map(bookMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }

@@ -8,4 +8,7 @@ public interface BookService {
 
     BookDto create(BookDto dto);
     List<BookDto> getAll();
+
+    List<BookDto> getBooksByAuthorId(Long authorId);
+    List<BookDto> getBooksByCategoryId(Long categoryId);
 }
